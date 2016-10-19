@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>HAUL.com</title>
+	<meta charset="utf-8">
+	<meta ng-model="viewport" name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/mycss.css">
+	<script src="fetch/fetch.js"></script>
+	<script src="js/appinit.js"></script>
+	<script src="js/controllers.js"></script>
+</head>
+<body ng-app="haul" ng-controller="mainCtrl">
+	<nav class="navbar  navbar-red">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			        <span class="icon-bar white"></span>
+			        <span class="icon-bar white"></span>
+			        <span class="icon-bar white"></span> 
+			    </button>
+				<a class="navbar-brand" href="#">HAUL</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul ng-show="isLoggedIn()" class="nav navbar-nav navbar-right">		
+					<li class="active"><a class="navlink" href="#news" ng-click="showingForm = 'news'">лента</a></li>
+					<li><a class="navlink" href="#global" ng-click="showingForm = 'global'">мир</a></li>
+					<li><a class="navlink" href="#likes" ng-click="showingForm = 'likes'">лайки</a></li>
+					<li><a class="navlink" href="#profile" ng-click="showingForm = 'profile'">я </a></li>
+					<li><a class="navlink" href="#" ng-click="logout()">выйти</a></li>
+				</ul>
+				<ul ng-show="!isLoggedIn()" class="nav navbar-nav navbar-right">	
+						<li class="active"><a class="navlink" href="#global" ng-click="showingForm = 'global'">мир</a></li>
+						<li><a class="navlink" href="#" ng-click="showingForm = 'signup'">регистрация</a></li>
+						<li><a class="navlink" href="#" ng-click="showingForm = 'login'">войти</a></li>
+				</ul>
+			</div>			
+		</div>
+	</nav>
+	<div class="container"> 
+		<div ng-if="showingForm == 'news'">
+			<div class="container">
+				<div ng-controller="newsCtrl">
+				</div>
+			</div>
+
+		</div>
+		<div ng-if="showingForm == 'likes'">
+		</div>
+		<div ng-if="showingForm == 'global'">
+			<div class="container">
+				<div ng-controller="globalCtrl">
+				</div>
+			</div>
+		</div>
+		<div ng-if="showingForm == 'login'">
+			<div class="container">
+				<div class="row ">
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-10 no-padding ">
+						<div class="grey-left-border blue-right-border no-margin no-padding">
+							<div class="orange-left-border no-padding no-margin shadow">
+								<div class="grey-back no-padding height shadow">
+									<div class="container-fluid padding-top">
+										<div class="col-sm-2">
+										</div>
+										<div class="col-sm-8 no-padding">
+											<div ng-controller="loginCtrl">
+										      	<form role="form" name="loginForm" ng-submit="login(credentials)" novalidate>
+													<div class="form-group">
+														<input type="text" class="form-control" id="username" name="username" placeholder="Логин" ng-model="credentials.username">
+													</div>
+													<div class="form-group">
+														<input type="password" class="form-control" id="password" name="password" placeholder="Пароль" ng-model="credentials.password">
+													</div>
+													<div ng-class='{err: loginError}'>{{ loginError }}</div>
+													<input type="submit" class="btn btn-default btn-block text-align-right orange-border grey-text" value="Войти"><br>
+												</form>
+											</div>
+										</div>
+										<div class="col-sm-2">
+										</div>
+									</div>
+								</div>
+							</div>							
+						</div>
+					</div>
+					<div class="col-md-1">
+					</div>
+				</div>		
+			</div>
+		</div>
+		<div ng-if="showingForm == signup">
+				<div class="container ">
+					<div class="row">
+						
+						<div class="container-fluid">
+							<div class="col-sm-2">
+							</div>
+							<div class="col-sm-8">
+								<div ng-controller="signupCtrl">
+									<form role="form" name="signupForm" ng-submit="signup()" novalidate>
+											<div class="form-group">
+												<input type="text" class="form-control" id="username" name="username" placeholder="Логин" ng-model="username" ng-required>
+											</div>
+											<div class="form-group">
+												<input type="password" class="form-control" id="password" name="password" placeholder="Пароль" ng-model="password" ng-required>
+											</div>
+											<div class="form-group">
+												<input type="password" ng-class='{ "has-error" : password != passwordConf}' class="form-control" id="passwordConf" name="passwordConf" placeholder="Подтверждение пароля" ng-model="passwordConf" ng-required>
+											</div>
+											<div class="form-group" ng-class="{ 'has-error' :   signup.email.$invalid && !signup.email.$pristine }">
+												<input type="email" class="form-control" name="email" ng-model="email" placeholder='Email'>
+												<div class="help-block" ng-messages="signup.email.$error" ng-show="!signup.email.$pristine">
+													<p ng-message="email">Некорректный email</p>
+												</div>
+											</div>	
+											
+											<div ng-class='{err: loginError}'>{{ loginError }}</div>
+											<input type="submit" class="btn btn-default btn-block" ng-disabled="signupForm.$invalid"value="Регистрация"><br>
+									</form>
+								</div>
+							</div>
+							<div class="col-sm-2">
+							</div>
+						</div>
+						<div class="col-md-1">
+						</div>
+					</div>		
+				</div>
+		</div>
+	</div>		
+</body>

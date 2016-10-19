@@ -1,0 +1,37 @@
+	<div class="container">
+		<div class="row ">
+			<div class="col-md-1">
+			</div>
+			<div class="col-md-10 no-padding ">
+				<div class="grey-left-border blue-right-border no-margin no-padding">
+					<div class="orange-left-border no-padding no-margin shadow">
+						<div class="grey-back no-padding height shadow">
+							<div class="container-fluid padding-top">
+								<div class="col-sm-2">
+								</div>
+								<div class="col-sm-8 no-padding">
+									<div ng-controller="loginCtrl">
+								      	<form role="form" name="loginForm" ng-submit="login(credentials)" novalidate>
+											<div class="form-group">
+												<input type="text" class="form-control" id="username" name="username" placeholder="Логин" ng-model="credentials.username">
+											</div>
+											<div class="form-group">
+												<input type="password" class="form-control" id="password" name="password" placeholder="Пароль" ng-model="credentials.password">
+											</div>
+											<div ng-class='{err: loginError}'>{{ loginError }}</div>
+											<input type="submit" class="btn btn-default btn-block text-align-right orange-border grey-text" value="Войти"><br>
+										</form>
+									</div>
+								</div>
+								<div class="col-sm-2">
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="col-md-1">
+			</div>
+		</div>		
+	</div>

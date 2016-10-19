@@ -1,0 +1,41 @@
+.navbar-red {
+	background-color: red;
+	color: white;
+}
+body {
+
+}
+nav a {
+	text-decoration: none;
+	color: white;
+}
+
+.white {
+	background-color: white;
+}
+.ss-style-bottom::before {
+    left:0;
+    width:100%;
+    height:30px;
+    -webkit-background-size:25px 100%;
+    -moz-background-size:25px 100%;
+    -o-background-size:25px 100%;
+    background-size:25px 100%;
+    top:0;
+    background-image:linear-gradient(583deg,#FFF 50%,transparent 50%),linear-gradient(136deg,#FFF 50%,transparent 50%);
+    margin-top:0px;
+    z-index: 100;
+}
+.ss-style-top::before {
+    left:0;
+    width:100%;
+    height:30px;
+    -webkit-background-size:25px 100%;
+    -moz-background-size:25px 100%;
+    -o-background-size:25px 100%;
+    background-size:25px 100%;
+    top:0;
+    background-image:linear-gradient(315deg,#FFF 50%,transparent 50%),linear-gradient(45deg,#FFF 50%,transparent 50%);
+    margin-top:-30px;
+    z-index:100;
+}
