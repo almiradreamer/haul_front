@@ -36,8 +36,7 @@ app.service('Server', function (AuthService) {
           method: 'get',
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            
+            'Content-Type': 'application/json'            
           }
         })
           .then(function(response) { 
@@ -50,16 +49,12 @@ app.service('Server', function (AuthService) {
             }
           })
   }
-  this.fetch = function (data, token) {
-    return fetch('http://192.241.144.134:8080/register', {
+  this.fetchSignUp = function (data) {
+    alert("kill ya");
+    return fetch('http://192.241.144.134:8080/api/register', {
           method: 'post',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
           body: JSON.stringify({
-              data: data,
-              token: token
+              data: data
           })
         })
           .then(function(response) { 
@@ -122,7 +117,8 @@ app.factory('AuthService', function ($rootScope, $window) {
                       $window.localStorage['userId'] = text.id;
                       $rootScope.$apply(function() {$rootScope.token = $window.localStorage['token'];
                         $rootScope.userId = $window.localStorage['userId'];
-                        $rootScope.loginError = undefined;;
+                        $rootScope.loginError = undefined;
+                        $rootScope.showingForm = 'news';
                       })
                     } 
                     if (text.success == false) {

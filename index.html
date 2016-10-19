@@ -6,11 +6,13 @@
 	<meta ng-model="viewport" name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>	
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 	<link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/mycss.css">
+	<script src="js/fileinput.min.js"></script>
 	<script src="fetch/fetch.js"></script>
 	<script src="js/appinit.js"></script>
 	<script src="js/controllers.js"></script>
@@ -80,7 +82,7 @@
 														<input type="password" class="form-control" id="password" name="password" placeholder="Пароль" ng-model="credentials.password">
 													</div>
 													<div ng-class='{err: loginError}'>{{ loginError }}</div>
-													<input type="submit" class="btn btn-default btn-block text-align-right orange-border grey-text" value="Войти"><br>
+													<input type="submit" class="btn btn-default btn-block" value="Войти"><br>
 												</form>
 											</div>
 										</div>
@@ -96,7 +98,7 @@
 				</div>		
 			</div>
 		</div>
-		<div ng-if="showingForm == 'signup'">
+		<div ng-show="showingForm == 'signup'">
 				<div class="container ">
 					<div class="row">						
 						<div class="container-fluid">
@@ -106,6 +108,12 @@
 								<div ng-controller="signupCtrl">
 									<form role="form" name="signupForm" ng-submit="signup()" novalidate>
 											<div class="form-group">
+												<input type="text" class="form-control" id="name" name="name" placeholder="Имя" ng-model="name" ng-required>
+											</div>
+											<div class="form-group">
+												<input type="text" class="form-control" id="surname" name="surname" placeholder="Фамилия" ng-model="surname">
+											</div>																					
+											<div class="form-group">
 												<input type="text" class="form-control" id="username" name="username" placeholder="Логин" ng-model="username" ng-required>
 											</div>
 											<div class="form-group">
@@ -114,15 +122,23 @@
 											<div class="form-group">
 												<input type="password" ng-class='{ "has-error" : password != passwordConf}' class="form-control" id="passwordConf" name="passwordConf" placeholder="Подтверждение пароля" ng-model="passwordConf" ng-required>
 											</div>
-											<div class="form-group" ng-class="{ 'has-error' :   signup.email.$invalid && !signup.email.$pristine }">
+											<div class="form-group" ng-class="{ 'has-error' :   signupForm.email.$invalid && !signupForm.email.$pristine }">
 												<input type="email" class="form-control" name="email" ng-model="email" placeholder='Email'>
-												<div class="help-block" ng-messages="signup.email.$error" ng-show="!signup.email.$pristine">
+												<div class="help-block" ng-messages="signupForm.email.$error" ng-show="!signupForm.email.$pristine">
 													<p ng-message="email">Некорректный email</p>
 												</div>
+											</div>							
+											<div class="form-group">
+									              <label class="control-label">Прикрепить фото</label>
+									              <input id="input-1" type="file" name="doc" class="file">
 											</div>	
-											
+											<div class="form-group">
+												<div class="checkbox">
+												  <label><input type="checkbox"  value="1" ng-model="role">Я известный и хочу вдохновлять людей!</label>
+												</div>
+											</div>											
 											<div ng-class='{err: loginError}'>{{ loginError }}</div>
-											<input type="submit" class="btn btn-default btn-block" ng-disabled="signupForm.$invalid"value="Регистрация"><br>
+											<input type="submit" class="btn btn-default btn-block" ng-disabled="signupForm.$invalid" value="Регистрация"><br>
 									</form>
 								</div>
 							</div>
@@ -134,5 +150,6 @@
 					</div>		
 				</div>
 		</div>
-	</div>		
+	</div>
+
 </body>
