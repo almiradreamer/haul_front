@@ -1,4 +1,4 @@
-var app = angular.module("haul", []);
+var app = angular.module("haul", ["ngMessages"]);
 
 /*app.config(function($routeProvider){
 	$routeProvider
@@ -51,7 +51,29 @@ app.service('Server', function (AuthService) {
           })
   }
   this.fetch = function (data, token) {
-    return fetch('https://alvolo.me:8080', {
+    return fetch('http://192.241.144.134:8080/register', {
+          method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              data: data,
+              token: token
+          })
+        })
+          .then(function(response) { 
+            return response.json()
+          }).then(function(data) {
+            if (data.success == false) {
+              return AuthService.logout();
+            } else {
+              return data;
+            }
+          })
+  }
+  this.fetch = function (data, token) {
+    return fetch('http://192.241.144.134:8080/', {
           method: 'post',
           headers: {
             'Accept': 'application/json',

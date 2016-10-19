@@ -27,7 +27,7 @@ app.controller('loginCtrl', function($scope, $rootScope, AuthService, Server) {
 })
 app.controller('globalCtrl', function($scope, $rootScope, Server) {
   $scope.data = '{"func":"getGlobalNews"}';
-  Server.fetch($scope.data, $rootScope.token).then(function(data) {
+  Server.fetchGet($scope.data, $rootScope.token).then(function(data) {
     $scope.$apply(function() {
       $scope.items = data;
     })
